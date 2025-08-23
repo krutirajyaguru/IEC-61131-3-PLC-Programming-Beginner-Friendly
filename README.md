@@ -35,7 +35,9 @@ Defines **five programming languages**:
 ---
 
 ## PLC Terms Across IEC 61131-3 Languages
+
     ![](Image/table.png)
+    
     > **Note:** “Normally” in **NO/NC** means the device’s idle state. STOP/E-Stop is **NC** so if wire breaks → machine stops safely.
 
 ## 4. IEC 61131-3 Languages
