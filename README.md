@@ -35,21 +35,8 @@ Defines **five programming languages**:
 ---
 
 ## PLC Terms Across IEC 61131-3 Languages
-
-| Term / Symbol        | Meaning / Behavior                          | Software Analogy                  | Ladder Diagram (LD)            | Function Block Diagram (FBD)   | Structured Text (ST)                       | Sequential Function Chart (SFC)         | Instruction List (IL) |
-|----------------------|--------------------------------------------|---------------------------------|--------------------------------|--------------------------------|-------------------------------------------|------------------------------------------|-----------------------|
-| **Input (I)**        | Physical sensor/switch                     | `if input:`                      | `` `—| |— / —|/|—` ``         | Input block / wire             | `IF input THEN ...`                        | Transition condition                     | `LD Input`            |
-| **Output (Q)**       | Actuator (lamp, motor, valve)              | `output = 1`                     | `` `—( )—` ``                  | Output block / wire            | `Output := TRUE;`                          | Step Action                               | `ST Output`           |
-| **NO Contact**       | TRUE when input is ON                       | `if x == 1:`                     | `` `—| |—` ``                  | Input → logic block            | `IF input = TRUE THEN ...`                  | Transition condition                      | `LD Input`            |
-| **NC Contact**       | TRUE when input is OFF                      | `if x == 0:`                     | `` `—|/|—` ``                  | NOT block before input         | `IF input = FALSE THEN ...`                 | Transition (negated condition)            | `ANDN Input`          |
-| **Coil**             | Drives output/memory bit if rung is TRUE   | `output = 1`                     | `` `—( )—` ``                  | Output of block                | `Output := TRUE;`                           | Step Action                               | `ST Output`           |
-| **Series (AND)**     | All inputs must be TRUE                     | `if a and b:`                    | `` `—| |—| |—` ``             | AND block                      | `IF a AND b THEN ...`                       | Transition requires both true             | AND                   |
-| **Parallel (OR)**    | Any input TRUE will pass                    | `if a or b:`                     | `` `—| |——+——( )—` ``          | OR block                       | `IF a OR b THEN ...`                        | Transition true if any condition          | OR                    |
-| **Latch (Seal-in)**  | Keeps output ON until reset                 | `(start or motor) and not stop` | `` `Feedback branch to coil` `` | SR / Set-Reset block           | `Output := (Start OR Output) AND NOT Stop` | Step keeps output until reset             | SR / Set / Reset      |
-| **Timer TON**        | Turns ON after a preset delay               | `timer.start(t)`                 | `` `—| input |—( TON T1, PT=5s )` `` | TON block                      | `TON(T1, IN:=Start, PT:=T#5s);`           | Step action enables timer, transition on done | TON                   |
-| **Counter CTU**      | Counts rising edges until preset is reached | `count += 1 until N`             | `` `—| pulse |—( CTU C1, PV=10 )` `` | CTU block                      | `CTU(C1, IN:=Pulse, PV:=10);`             | Step action increments counter             | CTU                   |
-
-> **Note:** “Normally” in **NO/NC** means the device’s idle state. STOP/E-Stop is **NC** so if wire breaks → machine stops safely.
+    ![](Image/table.png)
+    > **Note:** “Normally” in **NO/NC** means the device’s idle state. STOP/E-Stop is **NC** so if wire breaks → machine stops safely.
 
 ## 4. IEC 61131-3 Languages
 
