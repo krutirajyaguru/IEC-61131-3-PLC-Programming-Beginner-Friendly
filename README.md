@@ -48,7 +48,7 @@ Defines **five programming languages**:
 
 **Examples:**
 
-Lamp turns ON when switch is pressed:
+***Lamp turns ON when switch is pressed:***
 
 Ladder:
 
@@ -65,7 +65,7 @@ else:
     lamp = 0
 ```
 
-Start/Stop Motor (Latch circuit):
+***Start/Stop Motor (Latch circuit):***
 
 Ladder:
 
@@ -101,12 +101,19 @@ Once you see ladder as just IF-ELSE with symbols, it becomes much clearer.
 
 **Style:** Functions connected with wires
 
-AND two switches to control Lamp:
+**Examples:**
+
+***AND two switches to control Lamp:***
+
+Function Block Diagram:
+
 ```
 Switch1 ─┐
          ├─[AND]── Lamp
 Switch2 ─┘
 ```
+
+Programming way:
 
 ```python
 if switch1 == 1 and switch2 == 1:
@@ -115,7 +122,10 @@ else:
     lamp = 0   # lamp OFF
 ```
 
-Start/Stop latch:
+***Start/Stop latch:***
+
+Function Block Diagram:
+
 ```
 Start ─┐
 Motor ─┼─[ OR ]──┐
@@ -124,6 +134,8 @@ Stop  ─[ NOT ]───┘
            [ AND ]── Motor
 ```
 
+Programming way:
+
 ```python
 if (start == 1 or motor == 1) and (stop == 0):
     motor = 1
@@ -131,13 +143,17 @@ else:
     motor = 0
 ```
 
-Timer 5s:
+***Timer 5s:***
+
+Function Block Diagram:
+
 ```
 Start ──┐
 Stop  ──┴─[ NOT ]─┐
                    ├─[ AND ]─> IN of [ TON T1 (PT=5s) ] → Q ──> Motor
 Motor ─────────────┘
 ```
+Programming way:
 
 ```python
 if (start == 1 and stop == 0) or motor == 1:  
@@ -154,15 +170,22 @@ else:
 ### 4.3 Structured Text (ST)
 
 **Style:** High-level code (Pascal-like)
-**Lamp when switch pressed:**
 
-```Structured Text
+**Examples:**
+
+***Lamp when switch pressed:***
+
+Structured Text:
+
+```
 IF Switch THEN
     Lamp := TRUE;
 ELSE
     Lamp := FALSE;
 END_IF;
 ```
+
+Programming way:
 
 ```python
 if switch == 1:
@@ -171,15 +194,19 @@ else:
     lamp = 0
 ```
 
-**Start/Stop latch:**
+***Start/Stop latch:***
 
-```Structured Text
+Structured Text:
+
+```
 IF (Start OR Motor) AND (NOT Stop) THEN
     Motor := TRUE;
 ELSE
     Motor := FALSE;
 END_IF;
 ```
+
+Programming way:
 
 ```python
 # Motor stays ON once started until Stop is pressed.
@@ -198,13 +225,17 @@ else:
 
 **Style:** Flowchart/state machine
 
-Example:
+**Examples:**
+
+***Motor Start/Stop Sequence with 5s On-Delay:***
+
+Sequential Function Chart:
 
 ```
 [Idle] --(Start)--> [Delay 5s] --(T1.Q)--> [Run] --(Stop)--> [Idle]
 ```
 
-Code analogy:
+Programming way:
 
 ```python
 if state == "Idle" and Start and not Stop:
