@@ -20,9 +20,90 @@ while True:
     update_outputs()
 ```
 
+
+---
+## 2. PLC Terminology
+
+**POU (Program Organization Unit)**
+* Program: Main logic
+* Function (F): Stateless, input → output only
+* Function Block (FB): Stateful, remembers past values
+* Example: Timer FB remembers accumulated time
+
+      Function (F)
+        Stateless → does not remember anything between calls.
+        Input → calculation → output only.    
+        Example: Add(a, b) → returns a+b.
+        Every time you call it, it behaves exactly the same with the same inputs.
+        Cannot store internal variables that “remember” previous calls.
+
+        Analogy: Like a calculator button. Press 5 + 3 → 8. Press again → same result. It forgets everything once done.
+                 “It just take input, give output, forget everything.”
+
+      Function Block (FB)
+        Stateful → remembers values from previous calls.
+        Has internal memory (variables) called retentive variables.
+        Useful for processes that depend on history, e.g., timers, counters, PID controllers.
+        Example: Timer FB
+        Input: Start signal, PT (preset time)
+        Internal memory: Accumulated time
+        Output: Q (done) → depends on how long it has been running
+        Every time you call it, it remembers its last state.
+  
+        Analogy: Like a coffee machine with memory. Set it to “Espresso + Milk.” Next morning, it remembers last choice.
+                 “It remember things between calls, like timers, counters, or devices.”
+
+**Task**
+* Defines execution cycle
+* Types: Cyclic, Periodic, Event-driven
+* Example: Task runs every 100ms
+
+**Variable Types**
+* BOOL: True/False → digital signal
+* INT / DINT / REAL: Numbers
+* ARRAY: List of variables
+* STRUCT: Group of variables of different types
+
+**I/O**
+* Inputs: Sensors, switches
+* Outputs: Motors, lights
+* Memory mapping: Physical I/O ↔ Program variable
+
+**Memory \& Retention**
+* Retentive variable: Keeps value after power loss
+* Non-retentive variable: Resets on restart
+
+**Timers \& Counters**
+* TON: Timer ON delay
+* TOF: Timer OFF delay
+* TP: Pulse timer
+* CTU / CTD: Count up / count down
+
+**Scan Cycle**
+* Read Inputs
+* Execute Logic
+* Update Outputs
+    * Tip: Faster scan → quicker response, but more CPU load
+
+**Programming Languages**
+* LD: Ladder logic, graphical
+* ST: Structured Text, text-based (like Pascal)
+* FBD / SFC: Function Block Diagram / Sequential Function Chart
+
+**Communication Protocols**
+* Modbus TCP/RTU: Master/Slave register communication
+* MQTT: Publisher → Broker → Subscriber (IoT)
+* OPC UA: Standard industrial data exchange
+* Ethernet/IP, PROFINET: Industrial networks
+
+**Debugging / Monitoring**
+* Watch window: See variable values live
+* Breakpoints: Pause program
+* Force I/O: Override for testing
+  
 ---
 
-## 2. IEC 61131-3 Standard
+## 3. IEC 61131-3 Standard
 
 Defines **five programming languages**:
 
