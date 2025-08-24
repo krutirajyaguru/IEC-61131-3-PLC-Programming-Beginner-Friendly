@@ -101,8 +101,21 @@ Once you see ladder as just IF-ELSE with symbols, it becomes much clearer.
 
 **Style:** Functions connected with wires
 
-Start/Stop latch:
+AND two switches to control Lamp:
+```
+Switch1 ─┐
+         ├─[AND]── Lamp
+Switch2 ─┘
+```
 
+```python
+if switch1 == 1 and switch2 == 1:
+    lamp = 1   # lamp ON
+else:
+    lamp = 0   # lamp OFF
+```
+
+Start/Stop latch:
 ```
 Start ─┐
 Motor ─┼─[ OR ]──┐
@@ -111,20 +124,31 @@ Stop  ─[ NOT ]───┘
            [ AND ]── Motor
 ```
 
-Timer 5s:
-
+```python
+if (start == 1 or motor == 1) and (stop == 0):
+    motor = 1
+else:
+    motor = 0
 ```
-(Start AND NOT Stop) ──> TON T1 (PT=5s) ──> Motor
+
+Timer 5s:
+```
+Start ──┐
+Stop  ──┴─[ NOT ]─┐
+                   ├─[ AND ]─> IN of [ TON T1 (PT=5s) ] → Q ──> Motor
+Motor ─────────────┘
 ```
 
 ```python
-# Timer ON (5s) logic
-if Start == 1 and Stop == 0:   # Start pressed and Stop not pressed
-    # Timer counts up (waits for 5s) — simulated as already reached
-    Motor = 1                  # Motor turns ON after timer elapsed
+if (start == 1 and stop == 0) or motor == 1:  
+    if timer >= 5:       # after 5 seconds
+        motor = 1        # motor ON
 else:
-    Motor = 0                  # Motor OFF if input condition not met
+    motor = 0            # motor OFF
+    timer = 0            # reset timer
+
 ```
+
 ---
 
 ### 4.3 Structured Text (ST)
