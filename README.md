@@ -93,6 +93,7 @@ Once you see ladder as just IF-ELSE with symbols, it becomes much clearer.
 * **—| |— (NO contact):** TRUE when input is ON → `if switch == 1:`
 * **—|/|— (NC contact):** TRUE when input is OFF → `if switch == 0:`
 * **—( )— (Coil):** Output device, turns ON if rung TRUE → `lamp = 1`
+      - Each rung = one logical statement in your program.
 
 
 ---
@@ -270,7 +271,6 @@ Assembly-like, deprecated.
 
 * **Scan cycle:** Inputs → logic → outputs.
 * **STOP = NC:** ensures **fail-safe**.
-* **Seal-in latch:** most common interview rung.
 * **Timers:** TON (delay ON), TOF (delay OFF), TP (pulse).
 * **Counters:** CTU needs reset.
 * **Debounce:** use one-shots for clean counts.
